@@ -1,0 +1,12 @@
+import {
+	HttpInterceptor,
+	HttpRequest,
+	HttpHandler
+} from '@angular/common/http';
+
+<!-- This is the basic boilerplate code to create any interceptor -->
+export class AuthInterceptorService implements HttpInterceptor {
+	intercept(req: HttpRequest<any>, next: HttpHandler) {
+		retuen next.handle(req);
+	}
+}
