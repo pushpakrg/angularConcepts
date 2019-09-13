@@ -1,0 +1,14 @@
+JIT - Compiles TypeScript just in time for executing it.
+  1. Compiled in the browser.
+  2. Each file compiled separately.
+  3. No need to build after changing your code and before reloading the browser page.
+  4. Suitable for local development.
+  
+AOT - Compiles TypeScript during build phase.
+  1. Compiled by the machine itself, via the command line (Faster Rendering).
+  2. The Angular compiler extracts the metadata (@Component, @Input etc) once and generates a factory. When it needs to create an instance of it Angular calls the factory.
+  2. All code compiled together, inlining HTML/CSS in the scripts.
+  3. There's no need to download the Angular compiler if the app is already compiled. The compiler is roughly half of Angular itself, so omitting it dramatically reduces the application payload.
+  4. The AOT compiler detects and reports template binding errors during the build step before users can see them.
+  5. More secure, original source not disclosed and fewer opportunities for injection attacks.
+  6. Suitable for production builds.
