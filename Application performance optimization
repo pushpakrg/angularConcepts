@@ -1,0 +1,9 @@
+Application performance optimization:
+  - AOT compilation
+  - bundling and uglifying the application
+  - tree shaking
+  - lazy loading
+  - separating dependencies and devDependencies
+  - Using OnPush and TrackBy
+  - removing unnecessary 3rd party libraries and import statements
+  - avoid computing values within the template
