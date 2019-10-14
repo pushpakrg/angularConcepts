@@ -1,0 +1,25 @@
+Angular 2:
+  - Complete rewrite of the Angular framework
+  - Component-based
+  - Much faster
+  - Support for mobile devices
+  - TypeScript support
+  
+Angular 4:
+  - Improvements to Ahead-of-time (AOT)
+  - TypeScript update
+  - Animation packages are removed from the core package
+  - Else block
+  
+Angular 5:
+  - Http is depreciated to HttpClient
+  - Supports TypeScript 2.3
+  - Router Lifecycle Events
+  - Improvements to the Angular Compiler
+  
+Angular 6:
+  - Better service worker support
+  - Ivy rendering engine
+  - ng update and ng add
+  - <template> element completely removed
+  - Form validation changes
