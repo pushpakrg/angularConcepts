@@ -1,0 +1,10 @@
+Security practices:
+  - Check that all requests come from within your own web app and not external websites
+  - Sanitize all input data
+  - Use Angular template instead of DOM APIs
+  - Content Security Policies
+  - Validate all data with server-side code
+  - Use an offline template compiler
+  - Avoid including external URLs in your application
+  - Make JSON responses non-executable
+  - Keep all libraries and frameworks up-to-date
