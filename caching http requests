@@ -1,0 +1,127 @@
+https://blog.fullstacktraining.com/caching-http-requests-with-angular/
+
+<==============================================================================================================>
+1. We'll be using a service to cache the results of the response.
+<==============================================================================================================>
+
+  import { Injectable } from '@angular/core';
+  import { HttpClient } from '@angular/common/http';
+  import { Observable } from 'rxjs/Observable';
+  import 'rxjs/add/observable/of';
+  import 'rxjs/add/operator/share';
+  import 'rxjs/add/operator/map';
+
+  @Injectable()
+  export class ApiService {
+    data;
+    observable;
+    constructor(private http: HttpClient) { }
+
+    getProducts() {
+      if (this.data) {
+        return Observable.of(this.data);
+      } else if (this.observable) {
+        return this.observable;
+      } else {
+        this.observable = this.http.get('/api/products', {
+          observe: 'response'
+        })
+        .map(response =>  {
+          this.observable = null;
+          if (response.status === 400) {
+            return 'Request failed.';
+          } else if (response.status === 200) {
+            this.data = response.body;
+            return this.data;
+          }
+        })
+        .share();
+        return this.observable;
+      }
+    }
+  }
+  
+<==============================================================================================================>  
+2. We'll be using HTTP Interceptors
+<==============================================================================================================>
+
+  import { Injectable } from '@angular/core';
+  import { HttpEvent, HttpRequest, HttpResponse, HttpInterceptor, HttpHandler } from '@angular/common/http';
+  import { Observable } from 'rxjs/Observable';
+  import { startWith, tap } from 'rxjs/operators';
+  import 'rxjs/add/observable/of';
+  import { RequestCache } from './request-cache.service';
+
+  @Injectable()
+  export class CachingInterceptor implements HttpInterceptor {
+    constructor(private cache: RequestCache) {}
+
+    intercept(req: HttpRequest<any>, next: HttpHandler) {
+      const cachedResponse = this.cache.get(req);
+      return cachedResponse ? Observable.of(cachedResponse) : this.sendRequest(req, next, this.cache);
+    }
+
+    sendRequest(
+      req: HttpRequest<any>,
+      next: HttpHandler,
+      cache: RequestCache): Observable<HttpEvent<any>> {
+      return next.handle(req).pipe(
+        tap(event => {
+          if (event instanceof HttpResponse) {
+            cache.put(req, event);
+          }
+        })
+      );
+    }
+  }
+  
+  
+  import { Injectable } from '@angular/core';
+  import { HttpRequest, HttpResponse } from '@angular/common/http';
+
+  const maxAge = 30000;
+  @Injectable()
+  export class RequestCache  {
+
+    cache = new Map();
+
+    get(req: HttpRequest<any>): HttpResponse<any> | undefined {
+      const url = req.urlWithParams;
+      const cached = this.cache.get(url);
+
+      if (!cached) {
+        return undefined;
+      }
+
+      const isExpired = cached.lastRead < (Date.now() - maxAge);
+      const expired = isExpired ? 'expired ' : '';
+      return cached.response;
+    }
+
+    put(req: HttpRequest<any>, response: HttpResponse<any>): void {
+      const url = req.url;
+      const entry = { url, response, lastRead: Date.now() };
+      this.cache.set(url, entry);
+
+      const expired = Date.now() - maxAge;
+      this.cache.forEach(expiredEntry => {
+        if (expiredEntry.lastRead < expired) {
+          this.cache.delete(expiredEntry.url);
+        }
+      });
+    }
+  }
+  
+  
+  import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+  import { RequestCache } from './request-cache.service';
+  import { CachingInterceptor } from './caching-interceptor.service';
+
+  // ...
+
+  providers: [
+      RequestCache,
+      { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }
+    ],
+
+  // ...
