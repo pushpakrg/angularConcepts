@@ -22,6 +22,7 @@ https://blog.fullstacktraining.com/caching-http-requests-with-angular/
       }
     }
   
+    Please note that if your RxJS version is below 6 it would be ‘Observable.of’ instead.
   
   b)
     import { Injectable } from '@angular/core';
