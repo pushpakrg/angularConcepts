@@ -18,6 +18,8 @@ import { UserDetailsService } from 'src/app/services/auth-service/user-details.s
 export class HasRoleDirective implements OnInit {
   // the role the user must have 
   @Input() appHasRole: string;
+  // for multiple role check
+  // @Input() appHasRole: Array<string>;
 
   isVisible = false;
 
@@ -46,6 +48,8 @@ export class HasRoleDirective implements OnInit {
       this.viewContainerRef.clear();
     }
 
+    // for multiple role check
+    // if (this.appHasRole.includes(this.userRole))
     // If the user has the role needed to 
     // render this component we can add it
     if (this.userRole == this.appHasRole) {
