@@ -1,0 +1,27 @@
+1. Prevent user to enter space in textbox in Angular 6
+    <input type="text" (keydown.space)="$event.preventDefault();" required />
+
+2. You can create a custom validator to handle this.
+    new FormControl(field.fieldValue || '', [Validators.required, this.noWhitespaceValidator])
+    
+    public noWhitespaceValidator(control: FormControl) {
+      const isWhitespace = (control.value || '').trim().length === 0;
+      const isValid = !isWhitespace;
+      return isValid ? null : { 'whitespace': true };
+    }
+    
+    <div *ngIf="yourForm.hasError('whitespace')">Please enter valid data</div>
+
+3. Is the current required validator that angular 2 provides on its own if you wanted to have it also trim the result you could do something like:
+
+    app.ts
+    constructor(private builder: FormBuilder) {
+      this.form = builder.group({ name: ["", CustomValidators.required] });
+    }
+     
+    custom-validators.ts
+    export class CustomValidators {
+      static required(control: Control): ValidationResult {
+        return isBlank(control.value) || (isString(control.value) && control.value.trim() == "") ? {"required": true} : null;
+      }
+    }
