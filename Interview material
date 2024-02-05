@@ -1,23 +1,194 @@
-What is Angular?
+
+
+Angular
+------------------------------------------------
 AngularJS vs Angular?
-Single Page Application (SPA)
-Features of Angular
-Building Blocks
-Services
-Authentication & Authorization
-Annotation vs Decorator
-Directives
-Data Binding
-Components
-Dependency Injection
-Modules
-Routing
-Template
+bootstrapping
+Single Page Application (SPA) Architecture
+Bundling and minification (webpack/gulp)
+Angular lifecycle hooks
+ngOnChanges - parameter type simple changes
 Metadata
-Filters
-Lifecycle hooks
-View Encapsulation
-Pipes
+Modules
+Dependency Injection
+Ways to pass data between components
+Consuming services
+Accessing query param
+CLI command to create component under existing module
+ng-content ng-template and ng-container directive
+@Input, @Output
+ViewChild vs ContentChild
+hostLinstner vs hostBinding
+Reactive forms, Validations, get/set value, clear form data
+Reactive vs Template Driven forms
 RxJS
-Promise vs Observable
-AOT
+constructor vs ngOnInit
+Avoiding nested subscribes (switchmap vs mergemap vs concatmap)
+RxJS operators
+Promises and Observables
+Subject vs Behaviour Subject vs observables
+Routing
+Passing data using router and accessing in component
+Access route parameter
+Child route
+Wildcard route
+router outlet
+Custom Pipes
+Guards supported in Angular
+interceptors
+Angular version migration
+components vs directives
+Translation
+
+JIT vs AOT
+Angular application efficiency methods
+Lazy loading
+
+JavaScript/ES6/TS
+------------------------------------------------
+venilla javascript vs javascript frameworks
+premitive vs non-premitive data types
+Let, var, and const
+Hoisting var, let, const, function and function expression
+for, forEach, filter, map, Reduce
+Splice, Slice
+async-await
+Spread operator
+Destructuring
+Closure
+call, apply, bind
+lexical scope
+Arrow function
+Function Callback
+event loop
+this keyword
+setTimeout vs setInterval
+event bubbling
+
+
+CSS
+------------------------------------------------
+responsive design vs adaptive design
+css pre-processors vs css libraries
+Specificity
+Box Model
+Flexbox
+BEM (Block, Element and Module)
+Text center vertically and horizontally both - using flex
+Pixels, Rem & Em
+Pseudo Classes
+Pseudo elements
+Mixins
+
+
+HTML
+------------------------------------------------
+HTML semantic tags
+HTML API's - session, cookie and localstorage etc
+
+
+
+NodeJS & Express
+------------------------------------------------
+middlewares/custom middlewares
+Callback chaining
+Making HTTP requests
+Connecting nodeJS & Angular
+CORS
+Routing
+Controller
+Adding Mongoose
+Mongoose schema & Model
+GET, Update, Delete data
+Add token to auth request
+stateless vs stateful API's
+how to avoid callback hail
+authentication vs authorization
+
+
+MongoDB
+------------------------------------------------
+
+SQL vs NOSQL
+Updating documents using query & express/nodeJS
+mongoDB index - Text Index vs Normal Index
+agregation pipeline
+projection
+
+
+Git
+------------------------------------------------
+Merge child branch to parent
+revert to random commit
+Merge vs Rebase
+fetch vs pull
+
+
+Coding
+------------------------------------------------
+
+Remove duplicates from array - using set
+Repeat array elements - a = [1,2,3] => [1,2,3,1,2,3]
+Add elem at random position
+["item1", "item2", "item3"] -> "item1 | item2 | item3"
+
+
+Array clone/copy with its own reference
+settimeout(0) vs promise result
+	console.log(1);
+	setTimeout(() => console.log(2), 0);
+	const myPromise = new Promise((resolve, reject) => {
+		resolve('foo');
+	}).then(value => { console.log(3) });
+	console.log(4);
+
+Scope
+	const obj = {
+		i:10,
+		b: () => console.log(this.i),
+		c: function() {
+			console.log(this.i)
+		}
+	}
+	console.log(obj.b());
+	console.log(obj.c());
+
+variable, function and function expression hoisting
+	(function() {
+		console.log(typeof foo);
+		console.log(typeof bar);
+		
+		var foo = 'hello', 
+			bar = function(){
+				return 'world';
+			};
+			
+		function foo() {
+			return 'hello';
+		}
+	}());
+
+swap 2 varialble without using 3rd
+
+Combine the unique array elements
+const _array1 = ["Cat", "Dog", "Cow"];
+const _array2 = ["Cat", "Dog", "Fish"];
+
+Combine duplicates
+const _array1 = [3, 5, 5, 2, 8, 1, 2, 5];
+
+Find nth smallest/largest element
+
+p
+#content p
+<div id="content"><p style="color: #ffffff">Heading</p></div>
+
+
+greet();
+let greet = function() {
+    console.log('Hi, there.');
+}
+
+// I/P: aaabbcca = O/P: a3b2c2a1
+
+submit form data alert on browser back btn
